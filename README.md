@@ -1,22 +1,22 @@
-# gantt-task-react
+# gantt-task-react-plus
+
+> This is a modified version of the great [gantt-task-react](https://github.com/MaTeMaTuK/gantt-task-react) library, which is no longer maintained.
 
 ## Interactive Gantt Chart for React with TypeScript.
 
 ![example](https://user-images.githubusercontent.com/26743903/88215863-f35d5f00-cc64-11ea-81db-e829e6e9b5c8.png)
 
-## [Live Demo](https://matematuk.github.io/gantt-task-react/)
-
 ## Install
 
 ```
-npm install gantt-task-react
+npm install gantt-task-react-plus
 ```
 
 ## How to use it
 
 ```javascript
-import { Gantt, Task, EventOption, StylingOption, ViewMode, DisplayOption } from 'gantt-task-react';
-import "gantt-task-react/dist/index.css";
+import { Gantt, Task, EventOption, StylingOption, ViewMode, DisplayOption } from 'gantt-task-react-plus';
+import "gantt-task-react-plus/dist/index.css";
 
 let tasks: Task[] = [
     {
@@ -117,7 +117,7 @@ npm start
 | TaskListHeader             |        | Specifies the task list Header view                                                            |
 | TaskListTable              |        | Specifies the task list Table view                                                             |
 
-- TooltipContent: [`React.FC<{ task: Task; fontSize: string; fontFamily: string; }>;`](https://github.com/MaTeMaTuK/gantt-task-react/blob/main/src/components/other/tooltip.tsx#L56)
+- TooltipContent: [`React.FC<{ task: Task; fontSize: string; fontFamily: string; }>;`](src/components/other/tooltip.tsx#L56)
 - TaskListHeader: `React.FC<{ headerHeight: number; rowWidth: string; fontFamily: string; fontSize: string;}>;`
 - TaskListTable: `React.FC<{ rowHeight: number; rowWidth: string; fontFamily: string; fontSize: string; locale: string; tasks: Task[]; selectedTaskId: string; setSelectedTask: (taskId: string) => void; }>;`
 
