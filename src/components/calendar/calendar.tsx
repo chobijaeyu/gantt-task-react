@@ -20,6 +20,7 @@ export type CalendarProps = {
   columnWidth: number;
   fontFamily: string;
   fontSize: string;
+  hideWeekday?: boolean;
 };
 
 export const Calendar: React.FC<CalendarProps> = ({
@@ -31,6 +32,7 @@ export const Calendar: React.FC<CalendarProps> = ({
   columnWidth,
   fontFamily,
   fontSize,
+  hideWeekday = false,
 }) => {
   const getCalendarValuesForYear = () => {
     const topValues: ReactChild[] = [];
@@ -225,7 +227,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     for (let i = 0; i < dates.length; i++) {
       const date = dates[i];
       const bottomValue = getCachedDateTimeFormat(locale, {
-        weekday: "short",
+        weekday: hideWeekday ? undefined : "short",
         day: "numeric",
       }).format(date);
 
@@ -292,7 +294,7 @@ export const Calendar: React.FC<CalendarProps> = ({
       );
       if (i === 0 || date.getDate() !== dates[i - 1].getDate()) {
         const topValue = getCachedDateTimeFormat(locale, {
-          weekday: "short",
+          weekday: hideWeekday ? undefined : "short",
           day: "numeric",
           month: "short",
         }).format(date);

@@ -72,6 +72,7 @@ export interface EventOption {
    * Invokes on expander on task list
    */
   onExpanderClick?: (task: Task) => void;
+  hideWeekday?: boolean;
 }
 
 export interface DisplayOption {

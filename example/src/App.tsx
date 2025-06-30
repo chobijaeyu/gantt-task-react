@@ -10,6 +10,7 @@ const App = () => {
   const [tasks, setTasks] = React.useState<Task[]>(initTasks());
   const [isChecked, setIsChecked] = React.useState(true);
   const [locale, setLocale] = React.useState("en-GB");
+  const [hideWeekday, setHideWeekday] = React.useState(false);
   let columnWidth = 65;
   if (view === ViewMode.Year) {
     columnWidth = 350;
@@ -79,6 +80,15 @@ const App = () => {
       <h3>Locale</h3>
       <button onClick={() => setLocale("en-GB")}>English</button>
       <button onClick={() => setLocale("ja-JP")}>Japanese</button>
+      <h3>Options</h3>
+      <label>
+        <input
+          type="checkbox"
+          checked={hideWeekday}
+          onChange={() => setHideWeekday(!hideWeekday)}
+        />
+        Hide Weekday
+      </label>
 
       <h3>Gantt With Unlimited Height</h3>
       <Gantt
@@ -94,6 +104,7 @@ const App = () => {
         listCellWidth={isChecked ? "155px" : ""}
         columnWidth={columnWidth}
         locale={locale}
+        hideWeekday={hideWeekday}
       />
       <h3>Gantt With Limited Height</h3>
       <Gantt
@@ -110,6 +121,7 @@ const App = () => {
         ganttHeight={300}
         columnWidth={columnWidth}
         locale={locale}
+        hideWeekday={hideWeekday}
       />
     </div>
   );
