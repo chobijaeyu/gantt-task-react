@@ -20,6 +20,7 @@ export type CalendarProps = {
   columnWidth: number;
   fontFamily: string;
   fontSize: string;
+  hideWeekday?: boolean;
 };
 
 export const Calendar: React.FC<CalendarProps> = ({
@@ -31,6 +32,7 @@ export const Calendar: React.FC<CalendarProps> = ({
   columnWidth,
   fontFamily,
   fontSize,
+  hideWeekday = false,
 }) => {
   const getCalendarValuesForYear = () => {
     const topValues: ReactChild[] = [];
@@ -176,7 +178,10 @@ export const Calendar: React.FC<CalendarProps> = ({
       let topValue = "";
       if (i === 0 || date.getMonth() !== dates[i - 1].getMonth()) {
         // top
-        topValue = `${getLocaleMonth(date, locale)}, ${date.getFullYear()}`;
+        topValue = getCachedDateTimeFormat(locale, {
+          month: "long",
+          year: "numeric",
+        }).format(date);
       }
       // bottom
       const bottomValue = `W${getWeekNumberISO8601(date)}`;
@@ -221,9 +226,10 @@ export const Calendar: React.FC<CalendarProps> = ({
     const dates = dateSetup.dates;
     for (let i = 0; i < dates.length; i++) {
       const date = dates[i];
-      const bottomValue = `${getLocalDayOfWeek(date, locale, "short")}, ${date
-        .getDate()
-        .toString()}`;
+      const bottomValue = getCachedDateTimeFormat(locale, {
+        weekday: hideWeekday ? undefined : "short",
+        day: "numeric",
+      }).format(date);
 
       bottomValues.push(
         <text
@@ -272,6 +278,7 @@ export const Calendar: React.FC<CalendarProps> = ({
       const date = dates[i];
       const bottomValue = getCachedDateTimeFormat(locale, {
         hour: "numeric",
+        minute: "numeric",
       }).format(date);
 
       bottomValues.push(
@@ -286,11 +293,11 @@ export const Calendar: React.FC<CalendarProps> = ({
         </text>
       );
       if (i === 0 || date.getDate() !== dates[i - 1].getDate()) {
-        const topValue = `${getLocalDayOfWeek(
-          date,
-          locale,
-          "short"
-        )}, ${date.getDate()} ${getLocaleMonth(date, locale)}`;
+        const topValue = getCachedDateTimeFormat(locale, {
+          weekday: hideWeekday ? undefined : "short",
+          day: "numeric",
+          month: "short",
+        }).format(date);
         topValues.push(
           <TopPartOfCalendar
             key={topValue + date.getFullYear()}

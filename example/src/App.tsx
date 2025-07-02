@@ -9,6 +9,8 @@ const App = () => {
   const [view, setView] = React.useState<ViewMode>(ViewMode.Day);
   const [tasks, setTasks] = React.useState<Task[]>(initTasks());
   const [isChecked, setIsChecked] = React.useState(true);
+  const [locale, setLocale] = React.useState("en-GB");
+  const [hideWeekday, setHideWeekday] = React.useState(false);
   let columnWidth = 65;
   if (view === ViewMode.Year) {
     columnWidth = 350;
@@ -74,6 +76,20 @@ const App = () => {
         onViewListChange={setIsChecked}
         isChecked={isChecked}
       />
+
+      <h3>Locale</h3>
+      <button onClick={() => setLocale("en-GB")}>English</button>
+      <button onClick={() => setLocale("ja-JP")}>Japanese</button>
+      <h3>Options</h3>
+      <label>
+        <input
+          type="checkbox"
+          checked={hideWeekday}
+          onChange={() => setHideWeekday(!hideWeekday)}
+        />
+        Hide Weekday
+      </label>
+
       <h3>Gantt With Unlimited Height</h3>
       <Gantt
         tasks={tasks}
@@ -87,6 +103,8 @@ const App = () => {
         onExpanderClick={handleExpanderClick}
         listCellWidth={isChecked ? "155px" : ""}
         columnWidth={columnWidth}
+        locale={locale}
+        hideWeekday={hideWeekday}
       />
       <h3>Gantt With Limited Height</h3>
       <Gantt
@@ -102,6 +120,8 @@ const App = () => {
         listCellWidth={isChecked ? "155px" : ""}
         ganttHeight={300}
         columnWidth={columnWidth}
+        locale={locale}
+        hideWeekday={hideWeekday}
       />
     </div>
   );

@@ -65,6 +65,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   onDelete,
   onSelect,
   onExpanderClick,
+  hideWeekday = false,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const taskListRef = useRef<HTMLDivElement>(null);
@@ -400,11 +401,12 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     dateSetup,
     locale,
     viewMode,
+    rtl,
     headerHeight,
     columnWidth,
     fontFamily,
     fontSize,
-    rtl,
+    hideWeekday,
   };
   const barProps: TaskGanttContentProps = {
     tasks: barTasks,
